@@ -2,10 +2,10 @@
 # Preencha seus dados e leia a declaração de honestidade abaixo. NÃO APAGUE
 # nenhuma linha deste comentário de seu código!
 #
-#    Nome completo:
-#    Matrícula:
-#    Turma:
-#    Email:
+#    Nome completo: Eduardo Moisés Martins
+#    Matrícula: 202202118
+#    Turma: CC3M
+#    Email: dudummartins7@gmail.com
 #
 # DECLARAÇÃO DE HONESTIDADE ACADÊMICA:
 # Eu afirmo que o código abaixo foi de minha autoria. Também afirmo que não

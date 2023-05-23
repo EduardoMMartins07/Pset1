@@ -2,10 +2,10 @@
 # Preencha seus dados e leia a declaração de honestidade abaixo. NÃO APAGUE
 # nenhuma linha deste comentário de seu código!
 #
-#    Nome completo:
-#    Matrícula:
-#    Turma:
-#    Email:
+#    Nome completo: 'Eduardo Moisés Martins'
+#    Matrícula: '202202118'
+#    Turma: 'CC3M'
+#    Email: 'dudummartins7@gmail.com'
 #
 # DECLARAÇÃO DE HONESTIDADE ACADÊMICA:
 # Eu afirmo que o código abaixo foi de minha autoria. Também afirmo que não
@@ -25,7 +25,8 @@ import base64
 import tkinter
 from io import BytesIO
 from PIL import Image as PILImage
-
+# Havia um erro de 'reportMissingModuleSource' e não conseguia importar PIL.Image,
+# para solucionar só intalei localmente o modulo Pillow.
 
 # Classe Imagem:
 class Imagem:
@@ -35,10 +36,14 @@ class Imagem:
         self.pixels = pixels
 
     def get_pixel(self, x, y):
-        return self.pixels[x, y]
+        return self.pixels[(self.largura * x) + y]
+        # para retornar o endereço do indice dentro de um array unidimencional
+        # tem que fazer o calculo com a formula: (largura * x) + y.
 
     def set_pixel(self, x, y, c):
-        self.pixels[x, y] = c
+        self.pixels[(self.largura * x) + y] = c
+        # da mesma maneira que na função get_pixel a indexação estava incorreta
+        # nesta função também precisou ser corrigida para a forma atual.
 
     def aplicar_por_pixel(self, func):
         resultado = Imagem.nova(self.altura, self.largura)
@@ -48,11 +53,15 @@ class Imagem:
             for y in range(resultado.altura):
                 cor = self.get_pixel(x, y)
                 nova_cor = func(cor)
-            resultado.set_pixel(y, x, nova_cor)
+                resultado.set_pixel(y, x, nova_cor)
+                # a linha de cima não estava dentro deste 'for', dei um 'tab' nela
+                # para que a mudança ocorresse a todos os pixeis e não uma vez por linha
         return resultado
 
     def invertida(self):
-        return self.aplicar_por_pixel(lambda c: 256 - c)
+        return self.aplicar_por_pixel(lambda c: 255 - c)
+        # o valor máximo na escala RGB é ff, ou 255, que é o branco
+        # por isso o valor que será subtraido por 'c' tem que ser 255
 
     def borrada(self, n):
         raise NotImplementedError
