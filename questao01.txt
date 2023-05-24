@@ -1,0 +1,4 @@
+QUESTÃO 01:
+O output esperado seria:
+pixels:[226, 166, 119, 55]
+Pois inverte os valores de pixels, sendo para cada valor de pixels: 255 (o valor máximo aceito na escala de cor) - o valor de pixels.

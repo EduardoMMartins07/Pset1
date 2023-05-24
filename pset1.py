@@ -46,16 +46,17 @@ class Imagem:
         # nesta função também precisou ser corrigida para a forma atual.
 
     def aplicar_por_pixel(self, func):
-        resultado = Imagem.nova(self.altura, self.largura)
+        resultado = Imagem.nova(self.largura, self.altura)
+        # inverti a ordem dos parâmetros da função 'nova'
+        # para que o 1° agumento seja a largura e depois a altura.
         for x in range(resultado.largura):
-            nova_cor = ""
-            y = ""
             for y in range(resultado.altura):
-                cor = self.get_pixel(x, y)
+                cor = self.get_pixel(y, x)
+                # Inverti a ordem para que ficasse coerênte com a formula usada na função
                 nova_cor = func(cor)
                 resultado.set_pixel(y, x, nova_cor)
                 # a linha de cima não estava dentro deste 'for', dei um 'tab' nela
-                # para que a mudança ocorresse a todos os pixeis e não uma vez por linha
+                # para que a mudança ocorresse a todos os pixeis e não uma vez por linha.
         return resultado
 
     def invertida(self):
