@@ -69,12 +69,12 @@ class TestInvertida(unittest.TestCase):
         # Fiz o teste para conseguir realizar a Questão 02, onde pega a imagem 'bluegill.png'
         # e faz o uso do filtro de inversão nela, e depois a salva em uma pasta 'resultados'
         # com o nome do arquivo de 'questao02_inversao.png'.
-        # Para executar: 'python test.py TestInvertida.test_invertida_2'
+        # Para executar: 'python test.py TestInvertida.test_invertida_2'.
         im = pset1.Imagem.carregar('test_images/bluegill.png')
         resultado = im.invertida()
         pset1.Imagem.salvar(resultado, 'resultados/questao02_inversao.png')
         self.assertTrue(True)
-        # Definido como True para que seja possivel a execução deste teste sem falhas
+        # Definido como True para que seja possivel a execução deste teste sem falhas.
 
     def test_imagens_invertidas(self):
         for nome_arquivo in ('mushroom', 'twocats', 'chess'):

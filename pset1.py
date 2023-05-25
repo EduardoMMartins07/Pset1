@@ -36,9 +36,22 @@ class Imagem:
         self.pixels = pixels
 
     def get_pixel(self, x, y):
-        return self.pixels[(self.largura * x) + y]
         # para retornar o endereço do indice dentro de um array unidimencional
         # tem que fazer o calculo com a formula: (largura * x) + y.
+        try: 
+            return self.pixels[(self.largura * x) + y]
+        except:
+            if x < 0:
+                x = 0
+            if y < 0:
+                y = 0
+            if x >= self.altura:
+                x = self.altura - 1
+            if y >= self.largura:
+                y = self.largura - 1
+            return self.pixels[(self.largura * x) + y]
+        # Se ocorrer um erro ao buscar um pixel fora dos limites, o parametro fora recebera
+        # o valor mais próximo a ele.
 
     def set_pixel(self, x, y, c):
         self.pixels[(self.largura * x) + y] = c
@@ -52,17 +65,22 @@ class Imagem:
         for x in range(resultado.largura):
             for y in range(resultado.altura):
                 cor = self.get_pixel(y, x)
-                # Inverti a ordem para que ficasse coerênte com a formula usada na função
+                # Inverti a ordem para que ficasse coerênte com a formula usada na função.
                 nova_cor = func(cor)
                 resultado.set_pixel(y, x, nova_cor)
                 # a linha de cima não estava dentro deste 'for', dei um 'tab' nela
                 # para que a mudança ocorresse a todos os pixeis e não uma vez por linha.
         return resultado
-
+    
     def invertida(self):
         return self.aplicar_por_pixel(lambda c: 255 - c)
         # o valor máximo na escala RGB é ff, ou 255, que é o branco
-        # por isso o valor que será subtraido por 'c' tem que ser 255
+        # por isso o valor que será subtraido por 'c' tem que ser 255.
+
+    def correlacao(self):
+        resultado = Imagem.nova(self.largura, self.altura)
+        # Criando uma nova imagem para fazer o correlacionamento.
+        return resultado
 
     def borrada(self, n):
         raise NotImplementedError
