@@ -38,20 +38,16 @@ class Imagem:
     def get_pixel(self, x, y):
         # para retornar o endereço do indice dentro de um array unidimencional
         # tem que fazer o calculo com a formula: (largura * x) + y.
-        try: 
-            return self.pixels[(self.largura * x) + y]
-        except:
-            if x < 0:
-                x = 0
-            if y < 0:
-                y = 0
-            if x >= self.altura:
-                x = self.altura - 1
-            if y >= self.largura:
-                y = self.largura - 1
-            return self.pixels[(self.largura * x) + y]
-        # Se ocorrer um erro ao buscar um pixel fora dos limites, o parametro fora recebera
-        # o valor mais próximo a ele.
+        if x < 0:
+            x = 0
+        if y < 0:
+            y = 0
+        if x >= self.altura:
+            x = self.altura - 1
+        if y >= self.largura:
+            y = self.largura - 1
+        return self.pixels[(self.largura * x) + y]
+        # Se algum parâmetro estiver fora dos limites, atribui a ele o valor limite daquela direção.
 
     def set_pixel(self, x, y, c):
         self.pixels[(self.largura * x) + y] = c
@@ -77,9 +73,18 @@ class Imagem:
         # o valor máximo na escala RGB é ff, ou 255, que é o branco
         # por isso o valor que será subtraido por 'c' tem que ser 255.
 
-    def correlacao(self):
+    def correlacao(self, kernel):
         resultado = Imagem.nova(self.largura, self.altura)
         # Criando uma nova imagem para fazer o correlacionamento.
+        for x in range(self.largura):
+            for y in range(self.altura):
+            # Os dois loops acima são para que seja feito em cada pixel da imagem.
+                n = 0
+                for i in kernel:
+                # Este loop é para todos os valores do kernel sejam multiplicados pelo valor do pixel
+                # e seja feita uma soma, a cada pixel, e a soma será o novo valor do pixel com o kernel aplicado.
+                    n += (self.get_pixel(y, x) * i)
+                resultado.set_pixel(y, x, n)
         return resultado
 
     def borrada(self, n):

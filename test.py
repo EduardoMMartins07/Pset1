@@ -133,7 +133,24 @@ class TestFiltros(unittest.TestCase):
                 self.assertEqual(imagem_entrada, imagem_entrada_copia,
                                  "Cuidado para não modificar a imagem original!")
                 self.assertEqual(resultado,  esperado)
-
+    # Kernel, sendo representado por uma lista, para a questão 4.
+    kernel =   [0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                1, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
+    # Teste para conseguir testar a função 'correlacao' com o Kernel anterior.
+    def test_correlacao(self):
+        im = pset1.Imagem.carregar('test_images/pigbird.png')
+        resultado = im.correlacao(TestFiltros.kernel)
+        pset1.Imagem.salvar(resultado, 'resultados/questao04_correlacao.png')
+        self.assertTrue(True)
+        # 'python test.py TestFiltros.test_correlacao'
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
