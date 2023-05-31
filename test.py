@@ -146,17 +146,17 @@ class TestFiltros(unittest.TestCase):
                 0, 0, 0, 0, 0, 0, 0, 0, 0]
     
     # Teste para conseguir testar a função 'correlacao' com o Kernel anterior.
-    def test_correlacao(self):
+    def questao_04(self):
         im = pset1.Imagem.carregar('test_images/pigbird.png')
-        resultado = im.correlacao(TestFiltros.kernel, 5)
+        resultado = im.correlacao(TestFiltros.kernel, 9)
         pset1.Imagem.salvar(resultado, 'resultados/questao04_correlacao.png')
         self.assertTrue(True)
-        # 'python test.py TestFiltros.test_correlacao'
+        # 'python test.py TestFiltros.questao_04'
 
-    def test_blur(self):
-        im = pset1.Imagem.carregar('test_images/chess.png')
-        resultado = im.borrada(7)
-        pset1.Imagem.salvar(resultado, 'test_blur.png')
+    def test_implementacao_borrada(self):
+        im = pset1.Imagem.carregar('test_images/pigbird.png')
+        resultado = im.borrada(5)
+        pset1.Imagem.salvar(resultado, 'test_borrada.png')
         self.assertTrue(True)
 
 if __name__ == '__main__':

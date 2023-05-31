@@ -74,10 +74,11 @@ class Imagem:
         # por isso o valor que será subtraido por 'c' tem que ser 255.
 
     def correlacao(self, kernel, n):
-        # Essa função recebe um Kernel que é representado por uma lista.
+        # Essa função recebe um Kernel que é representado por uma lista e o valor de n.
         resultado = Imagem.nova(self.largura, self.altura)
         # Criando uma nova imagem para fazer o correlacionamento.
         m = int((n - 1) / 2)
+        # Considerando que quailquer valor de n seja um número impar.
         for x in range(self.largura):
             for y in range(self.altura):
             # Os dois loops acima são para que seja feito em cada pixel da imagem.
@@ -85,16 +86,25 @@ class Imagem:
                 i = 0
                 for l in range((x - m), (x + m + 1)):
                     for a in range((y - m), (y + m + 1)):
+                    # Os dois loops acima, é feito para fazer o calculo de correlacionamento entre a imagem e o kernel.
                         soma_kernel += self.get_pixel(a, l) * kernel[i]
                         i += 1
+                        # Soma todos os valores do correlacionamento de cada pixel com seu respectivo valor do kernel.
                 soma_kernel = round(soma_kernel)
+                # Para que n haja valores float.
                 if soma_kernel > 255:
                     soma_kernel = 255
+                    # Limitando o valor máximo a 255.
                 if soma_kernel < 0:
                     soma_kernel = 0
+                    # Limitando o valor mínimo a 0.
                 resultado.set_pixel(y, x, soma_kernel)
+                # Aplicando o valor resultante ao respectivo pixel.
         return resultado
 
+    # Essa função recebe n, e cria uma lista de tamanha n*n e preenche ela inteira com o valor de 1/(n*n)
+    # para que a soma de todos os valores da lista seja igual a 1. No retorn dela, ela chama a função correlação
+    # enviando como parametros a lista e n.
     def borrada(self, n):
         kernel = []
         valores_kernel = 1 / (n*n)
