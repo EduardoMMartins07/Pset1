@@ -155,7 +155,7 @@ class TestFiltros(unittest.TestCase):
 
     def test_blur(self):
         im = pset1.Imagem.carregar('test_images/chess.png')
-        resultado = im.borrada(5)
+        resultado = im.borrada(7)
         pset1.Imagem.salvar(resultado, 'test_blur.png')
         self.assertTrue(True)
 

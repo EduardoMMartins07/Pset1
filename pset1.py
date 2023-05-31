@@ -82,9 +82,11 @@ class Imagem:
             for y in range(self.altura):
             # Os dois loops acima são para que seja feito em cada pixel da imagem.
                 soma_kernel = 0
-                for l in range((x - m), (x + m)):
-                    for a in range((y - m), (y + m)):
-                        soma_kernel += self.get_pixel(a, l) * kernel[0]
+                i = 0
+                for l in range((x - m), (x + m + 1)):
+                    for a in range((y - m), (y + m + 1)):
+                        soma_kernel += self.get_pixel(a, l) * kernel[i]
+                        i += 1
                 soma_kernel = round(soma_kernel)
                 if soma_kernel > 255:
                     soma_kernel = 255
