@@ -167,6 +167,13 @@ class TestFiltros(unittest.TestCase):
         self.assertTrue(True)
     # 'python test.py TestFiltros.test_implementacao_focada'
 
+    def test_implementacao_bordas(self):
+        im = pset1.Imagem.carregar('test_images/construct.png')
+        resultado = im.bordas()
+        pset1.Imagem.salvar(resultado, 'resultados/bordas.png')
+        self.assertTrue(True)
+    # 'python test.py TestFiltros.test_implementacao_bordas'
+
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
 

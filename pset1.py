@@ -132,7 +132,32 @@ class Imagem:
         return im
     
     def bordas(self):
-        raise NotImplementedError
+        resultado = Imagem.nova(self.largura, self.altura)
+        # O Kernel de Kx:
+        kernel_x = [-1, 0, 1,
+                    -2, 0, 2,
+                    -1, 0, 1]
+        # O Kernel de Ky:
+        kernel_y = [-1, -2, -1,
+                     0,  0,  0,
+                     1,  2,  1]
+        
+        # Faz 1 imagem com cada Kernel.
+        o_x = self.correlacao(kernel_x, 3)
+        o_y = self.correlacao(kernel_y, 3)
+
+        for x in range(self.largura):
+            for y in range(self.altura):
+                # Aplicando a formula para cada valor de Ox e Oy.
+                valor_parcial = round(math.sqrt( ((o_x.get_pixel(y, x))**2) + ((o_y.get_pixel(y, x))**2) ))
+                if valor_parcial < 0:
+                    valor_parcial = 0
+                if valor_parcial > 255:
+                    valor_parcial = 255
+                # Aplicando o valor resultante em sua determinada coordenada.
+                resultado.set_pixel(y, x, valor_parcial)
+        return resultado
+        # A função de bordas não está 100%, ao fazer os testes há falhas.
 
     # Abaixo deste ponto estão utilitários para carregar, salvar e mostrar
     # as imagens, bem como para a realização de testes.
