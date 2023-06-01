@@ -154,10 +154,18 @@ class TestFiltros(unittest.TestCase):
         # 'python test.py TestFiltros.questao_04'
 
     def test_implementacao_borrada(self):
-        im = pset1.Imagem.carregar('test_images/pigbird.png')
+        im = pset1.Imagem.carregar('test_images/cat.png')
         resultado = im.borrada(5)
-        pset1.Imagem.salvar(resultado, 'test_borrada.png')
+        pset1.Imagem.salvar(resultado, 'resultados/cat_borrada.png')
         self.assertTrue(True)
+    # 'python test.py TestFiltros.test_implementacao_borrada'
+
+    def test_implementacao_focada(self):
+        im = pset1.Imagem.carregar('test_images/python.png')
+        resultado = im.focada(11)
+        pset1.Imagem.salvar(resultado, 'resultados/focada.png')
+        self.assertTrue(True)
+    # 'python test.py TestFiltros.test_implementacao_focada'
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)

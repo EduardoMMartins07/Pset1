@@ -112,9 +112,25 @@ class Imagem:
             kernel.append(valores_kernel)
         return self.correlacao(kernel, n)
             
+    # A função cria uma nova imagem e uma imagem borrada, aplica a formula e retorna a imagem filtrada.
     def focada(self, n):
-        raise NotImplementedError
-
+        im = Imagem.nova(self.largura, self.altura)  
+        borrada = self.borrada(n)
+        for x in range(self.largura):
+            for y in range(self.altura):
+                pixel_borrado = borrada.get_pixel(y, x)
+                # Armazena o valor do pixel da imagem borrada, de cada coordenada individual.
+                pixel_normal = self.get_pixel(y, x)
+                # Armazena o valor do pixel da imagem normal, de cada coordenada individual.
+                resultado_parcial = (pixel_normal*2) - pixel_borrado
+                if resultado_parcial > 255:
+                    resultado_parcial = 255
+                if resultado_parcial < 0:
+                    resultado_parcial = 0
+                # Aplica a formula e condiciona para estar entre [0, 255] e aplica o valor.
+                im.set_pixel(y, x, resultado_parcial)
+        return im
+    
     def bordas(self):
         raise NotImplementedError
 
